@@ -4,115 +4,64 @@
 using namespace std;
 
 
-class Binomial {
+
+class MTriangular
+{
     //Atributos
 private: 
     int n;
     int n2;
-    int kk;
+    int c;
     int k;
-    int Mat_Reduc[(n2*n2)-((n2*(n2-1))/2)];    
-    int *Punt_Reduc = &Mat_Reduc[0];
-    
+    int size;
+    int *Mat_Reduc;
+       
     //Métodos
 public: 
-    Binomial (int* Mat int int );
-    void Combi(int int );
-    ~Binomial ();
-    
+    ~MTriangular() {delete[] Mat_Reduc;}
+    MTriangular(int x,int y){
+        int k=y;
+        int n=x;
+        int n2=n+1;
+        size=(n2*n2)-((n2*(n2-1))/2);
+        Mat_Reduc = new int[size]; 
+    }
+    void Combi(int x,int y);   
 };
 
-Binomial:: Binomial(int* p int n int k1){
-n=n;
-n2=n+1;
-kk=k1;
-}
-
-Binomial:: ~Binomial() {
-   delete[] dato;        // Libera la memoria reservada para dato
-}
-
-void Binimial:: combi(int* p int n int k){
-    int k = 0;
-    for(int i=0; i<=n; i++){
+void MTriangular::Combi(int n, int k){
+    int c = 0;
+    for(int i=0; i<=n; i++) {
         for(int j=0; j<=i; j++){
             if(j==0 || j==i){
-                Punt_Reduc[k] = 1;
-                cout << "\t" <<  Punt_Reduc[k];
+                Mat_Reduc[c] = 1;
+                cout << "\t" <<  Mat_Reduc[c];
             }
             else{
-                Punt_Reduc[k] = Punt_Reduc[k-i] + Punt_Reduc[k-i-1];
-                //cout<<"Punt_Reduc[k] = es: "<<Punt_Reduc[k] <<endl;
-                cout << "\t" <<  Punt_Reduc[k];
-
+                Mat_Reduc[c] = Mat_Reduc[c-i] + Mat_Reduc[c-i-1];
+                //cout<<"Mat_Reduc[k] = es: "<<Mat_Reduc[k] <<endl;
+                cout << "\t" <<  Mat_Reduc[c];
             }
-                   if(i==n && j==kk){
-                    kk=k;
-
+                if(i==n && j==k){
+                    k=c;
                 }
-            k++;
+            c++;
         }
         cout << endl;
     }
- cout<<"la comb es: "<<Punt_Reduc[kk] <<endl;
-    return 1;
-    
+    cout<<"la comb es: "<<Mat_Reduc[k] <<endl;
 }
-
-
-void main()
-{    
-    cout << "Ingrese n: ";
-    cin >> n;
-    int n2=n+1;
-    int kk;
-    cout << "Ingrese k: ";
-    cin >> kk; 
-    Binomial E1(*p,12, 3);
-	E1.Combi();
-	E1.~Binomial();
     
-}
 
-
-
-/*
 int main(){
-
     int n;
     cout << "Ingrese n: ";
     cin >> n;
-    int n2=n+1;
-    int kk;
+    int k;
     cout << "Ingrese k: ";
-    cin >> kk;    
+    cin >> k; 
+    MTriangular E(n,k);
+    E.Combi(n,k);
     
-    int Mat_Reduc[(n2*n2)-((n2*(n2-1))/2)];    
-    int *Punt_Reduc = &Mat_Reduc[0];
+}
 
-    cout << endl << endl;
-    int k = 0;
-    for(int i=0; i<=n; i++){
-        for(int j=0; j<=i; j++){
-            if(j==0 || j==i){
-                Punt_Reduc[k] = 1;
-                cout << "\t" <<  Punt_Reduc[k];
-            }
-            else{
-                Punt_Reduc[k] = Punt_Reduc[k-i] + Punt_Reduc[k-i-1];
-                //cout<<"Punt_Reduc[k] = es: "<<Punt_Reduc[k] <<endl;
-                cout << "\t" <<  Punt_Reduc[k];
-
-            }
-                   if(i==n && j==kk){
-                    kk=k;
-
-                }
-            k++;
-        }
-        cout << endl;
-    }
- cout<<"la comb es: "<<Punt_Reduc[kk] <<endl;
-    return 1;
-} 
-/*
